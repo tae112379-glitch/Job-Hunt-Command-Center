@@ -1,0 +1,98 @@
+[
+ {
+  "title": "GNSS/GPS 수신기 펌웨어 개발자 (신입)",
+  "company": "정밀측위㈜",
+  "description": "GNSS 수신기 펌웨어를 C/C++로 개발합니다. NMEA 파싱, RTK, 임베디드 RTOS 경험 우대.",
+  "url": "https://example.com/jobs/1",
+  "deadline": "2026-11-07",
+  "location": "서울"
+ },
+ {
+  "title": "위치기반 서비스 백엔드 개발자",
+  "company": "맵링크",
+  "description": "GPS 위치 데이터 수집 서버를 Python, MQTT 기반으로 구축. 리눅스 경험.",
+  "url": "https://example.com/jobs/2",
+  "deadline": "2026-11-13",
+  "location": "서울"
+ },
+ {
+  "title": "네트워크 엔지니어 (신입/경력)",
+  "company": "넷웍스코리아",
+  "description": "TCP/IP, 라우팅, 스위칭 장비 운영. CCNA 우대. 네트워크 장애 대응.",
+  "url": "https://example.com/jobs/3",
+  "deadline": "2026-11-09",
+  "location": "서울"
+ },
+ {
+  "title": "무선통신 프로토콜 SW 개발",
+  "company": "LoRa텍",
+  "description": "LoRa, BLE 무선통신 프로토콜 스택 개발. C언어, 소켓 프로그래밍, 펌웨어.",
+  "url": "https://example.com/jobs/4",
+  "deadline": "2026-11-18",
+  "location": "서울"
+ },
+ {
+  "title": "임베디드 SW 개발자 (STM32)",
+  "company": "스마트디바이스",
+  "description": "STM32 기반 임베디드 펌웨어, UART/SPI, RTOS. 신호처리 DSP 경험자 우대.",
+  "url": "https://example.com/jobs/5",
+  "deadline": "2026-11-06",
+  "location": "서울"
+ },
+ {
+  "title": "5G/LTE 모뎀 소프트웨어 엔지니어",
+  "company": "모바일텍",
+  "description": "LTE/5G 프로토콜 소프트웨어 개발, C++, 리눅스 환경.",
+  "url": "https://example.com/jobs/6",
+  "deadline": "2026-11-24",
+  "location": "서울"
+ },
+ {
+  "title": "백엔드 개발자 (Python)",
+  "company": "웹서비스랩",
+  "description": "FastAPI로 REST API 개발. Python 백엔드 경험.",
+  "url": "https://example.com/jobs/7",
+  "deadline": "2026-11-15",
+  "location": "서울"
+ },
+ {
+  "title": "해외영업 마케팅 담당",
+  "company": "글로벌트레이드",
+  "description": "영업 및 마케팅 업무, 해외 바이어 발굴.",
+  "url": "https://example.com/jobs/8",
+  "deadline": "2026-11-10",
+  "location": "서울"
+ },
+ {
+  "title": "회계 담당자",
+  "company": "재무파트너",
+  "description": "회계 결산 및 세무 신고 업무.",
+  "url": "https://example.com/jobs/9",
+  "deadline": "2026-11-12",
+  "location": "서울"
+ },
+ {
+  "title": "UI 디자이너",
+  "company": "디자인스튜디오",
+  "description": "앱 UI 디자이너 모집. 피그마 능숙자.",
+  "url": "https://example.com/jobs/10",
+  "deadline": "2026-11-14",
+  "location": "서울"
+ },
+ {
+  "title": "자율주행 측위 SW 엔지니어",
+  "company": "오토내비",
+  "description": "GNSS/IMU 센서 융합 측위, C++, 신호처리. 칼만필터 경험.",
+  "url": "https://example.com/jobs/11",
+  "deadline": "2026-11-29",
+  "location": "서울"
+ },
+ {
+  "title": "IoT 네트워크 SW 개발자",
+  "company": "센서넷",
+  "description": "MQTT, TCP/UDP 소켓, 임베디드 리눅스 기반 IoT 게이트웨이 개발.",
+  "url": "https://example.com/jobs/12",
+  "deadline": "2026-11-08",
+  "location": "서울"
+ }
+]

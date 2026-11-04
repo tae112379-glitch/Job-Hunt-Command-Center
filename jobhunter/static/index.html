@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Job Hunt Board</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--fg:#1c2330;--mut:#667085;--line:#e4e7ec;--acc:#2b6cf6;--ok:#12805c}
+@media (prefers-color-scheme:dark){:root{--bg:#10141b;--card:#1a202b;--fg:#e8ecf3;--mut:#98a2b3;--line:#2a3342;--acc:#6d9bff;--ok:#4cc9a0}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.5 system-ui,"Noto Sans KR",sans-serif}
+header{padding:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+h1{font-size:18px;margin:0}.stats{color:var(--mut)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 12px}
+input,select,button{font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--fg)}
+button{cursor:pointer}a{color:var(--acc)}
+.board{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(240px,1fr);gap:12px;padding:0 16px 24px;overflow-x:auto}
+.col{background:var(--bg);min-width:240px}.col h2{font-size:13px;margin:0 0 8px;color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:8px}
+.t{font-weight:600}.m{color:var(--mut);font-size:12px}
+.score{float:right;font-weight:700;color:var(--ok)}
+.tag{display:inline-block;font-size:11px;border:1px solid var(--line);border-radius:99px;padding:0 7px;margin:4px 4px 0 0}
+</style></head><body>
+<header><h1>🎯 Job Hunt Board</h1><div class="stats" id="stats"></div></header>
+<div class="bar">
+ <input id="q" placeholder="검색 (제목/회사/내용)">
+ <select id="cat"><option value="">전체 분야</option><option value="gps">GPS/위치</option><option value="network">네트워크/통신</option><option value="software">SW/임베디드</option></select>
+ <label>최소 적합도 <input id="min" type="number" value="10" min="0" max="100" style="width:70px"></label>
+ <a href="/api/calendar.ics"><button>📅 캘린더(.ics)</button></a>
+</div>
+<div class="board" id="board"></div>
+<script>
+const ST={interested:"관심",applied:"지원",document_pass:"서류합격",interview:"면접",offer:"합격",rejected:"불합격"};
+const CAT={gps:"GPS/위치",network:"네트워크",software:"SW"};
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+async function load(){
+  const p=new URLSearchParams({min_score:min.value});
+  if(q.value)p.set("q",q.value); if(cat.value)p.set("category",cat.value);
+  const [jobs,st]=await Promise.all([fetch("/api/jobs?"+p).then(r=>r.json()),fetch("/api/stats").then(r=>r.json())]);
+  stats.textContent=`전체 ${st.total}건 · 표시 ${jobs.length}건`;
+  board.innerHTML=Object.entries(ST).map(([k,label])=>{
+    const list=jobs.filter(j=>j.status===k);
+    return `<div class="col"><h2>${label} (${list.length})</h2>${list.map(card).join("")}</div>`}).join("");
+}
+function card(j){
+  const opts=Object.entries(ST).map(([k,l])=>`<option value="${k}" ${k===j.status?"selected":""}>${l}</option>`).join("");
+  const tags=j.categories.map(c=>`<span class="tag">${esc(CAT[c]||c)}</span>`).join("");
+  const url=/^https?:\/\//.test(j.url)?j.url:"#";
+  return `<div class="card"><span class="score">${j.score}</span>
+   <div class="t"><a href="${esc(url)}" target="_blank" rel="noopener">${esc(j.title)}</a></div>
+   <div class="m">${esc(j.company)} ${j.deadline?"· 마감 "+esc(j.deadline):""}</div>${tags}
+   <div style="margin-top:6px"><select onchange="mv(${j.id},this.value)">${opts}</select></div></div>`;
+}
+async function mv(id,status){await fetch("/api/jobs/"+id,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({status})});load();}
+[q,cat,min].forEach(e=>e.addEventListener("input",load));load();
+</script></body></html>
