@@ -1,0 +1,14 @@
+services:
+  web:
+    build: .
+    env_file: .env
+    ports: ["8000:8000"]
+    volumes: ["jobdata:/data"]
+  bot:
+    build: .
+    env_file: .env
+    command: python -m jobhunter.bot
+    volumes: ["jobdata:/data"]
+    depends_on: [web]
+volumes:
+  jobdata:

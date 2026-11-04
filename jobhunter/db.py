@@ -16,6 +16,9 @@ CREATE TABLE IF NOT EXISTS jobs(
   interview_at TEXT, notified INTEGER DEFAULT 0,
   created_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
+CREATE TABLE IF NOT EXISTS api_usage(
+  day TEXT, source TEXT, n INTEGER DEFAULT 0, PRIMARY KEY(day, source)
+);
 """
 
 

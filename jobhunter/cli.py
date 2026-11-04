@@ -1,4 +1,4 @@
-"""사용: python -m jobhunter.cli collect-file data/sample_jobs.json | collect-rss URL | serve"""
+"""사용: python -m jobhunter.cli collect-file FILE | collect-rss URL | collect-saramin | serve [PORT]"""
 import sys
 from . import collectors
 
@@ -11,6 +11,9 @@ def main(argv=None):
         print(collectors.ingest(collectors.from_json_file(a[1]), min_score=10))
     elif a[0] == "collect-rss":
         print(collectors.ingest(collectors.from_rss(a[1]), min_score=10))
+    elif a[0] == "collect-saramin":
+        from . import saramin
+        print(saramin.collect())
     elif a[0] == "serve":
         import uvicorn
         uvicorn.run("jobhunter.api:app", host="0.0.0.0", port=int(a[1]) if len(a) > 1 else 8000)

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Job Hunt Command Center</title>
+<meta name="description" content="GPS·네트워크·SW 직무 채용 공고를 모아 적합도를 계산하고 지원 현황을 관리하는 개인 취업 준비 도구">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--fg:#1c2330;--mut:#667085;--line:#e4e7ec;--acc:#2b6cf6}
+@media (prefers-color-scheme:dark){:root{--bg:#10141b;--card:#1a202b;--fg:#e8ecf3;--mut:#98a2b3;--line:#2a3342;--acc:#6d9bff}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.7 system-ui,"Noto Sans KR",sans-serif}
+main{max-width:760px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:28px;margin:0 0 8px}h2{font-size:18px;margin:32px 0 8px}p{margin:8px 0}.mut{color:var(--mut)}
+a{color:var(--acc)}ul{padding-left:20px}li{margin:4px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0}
+img{max-width:100%;border:1px solid var(--line);border-radius:12px}
+code{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+</style></head><body><main>
+<h1>🎯 Job Hunt Command Center</h1>
+<p class="mut">GPS·네트워크·SW 직무 채용 공고를 모아 적합도를 계산하고, 지원 현황을 한곳에서 관리하는 개인 취업 준비 도구입니다.</p>
+
+<h2>목적</h2>
+<p>GPS 송수신 장치 제작 캡스톤 경험을 살려 GPS/GNSS·네트워크·임베디드/SW 직무에 지원하기 위해 만든 <b>비상업적 개인 학습 프로젝트</b>입니다. 일반 이용자에게 제공하는 서비스가 아닙니다.</p>
+
+<h2>기능</h2>
+<div class="card"><ul>
+<li>채용 공고 수집: 공식 Open API·RSS만 사용 (사람인 Open API, 공공데이터포털 등)</li>
+<li>키워드 가중치 기반 적합도(0~100점) 및 분야(GPS·네트워크·SW) 분류</li>
+<li>지원 상태 칸반 (관심 → 지원 → 서류합격 → 면접 → 합격/불합격)</li>
+<li>마감·면접 일정 캘린더(.ics) 내보내기, Notion 기록, 텔레그램 마감 알림</li>
+</ul></div>
+<img src="dashboard.png" alt="대시보드 화면">
+
+<h2>데이터 이용 원칙</h2>
+<ul>
+<li>API 이용약관과 robots.txt를 준수하며, 하루 호출 횟수를 코드로 제한합니다(기본 20회).</li>
+<li>수집한 공고는 본인 열람용으로만 사용하고 외부에 재배포하지 않습니다.</li>
+<li>각 공고는 원문(출처 사이트) 링크로 연결하며, 출처를 표기합니다.</li>
+<li>대시보드는 비밀번호로 보호되어 제3자에게 공개되지 않습니다.</li>
+</ul>
+
+<h2>소스 코드</h2>
+<p><a href="https://github.com/tae112379-glitch/Job-Hunt-Command-Center">github.com/tae112379-glitch/Job-Hunt-Command-Center</a></p>
+</main></body></html>

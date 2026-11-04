@@ -4,9 +4,11 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse, PlainTextResponse
 from pydantic import BaseModel
-from . import db, integrations, collectors
+from . import db, integrations, collectors, auth
 
+auth.check_startup()
 app = FastAPI(title="Job Hunt Command Center")
+app.add_middleware(auth.BasicAuthMiddleware)
 STATIC = Path(__file__).parent / "static"
 
 
@@ -21,6 +23,13 @@ class MailIn(BaseModel):
     subject: str
     body: str = ""
     job_id: int | None = None
+
+
+@app.get("/healthz")
+def healthz():
+    with db.conn() as c:
+        c.execute("SELECT 1")
+    return {"ok": True}
 
 
 @app.get("/")
@@ -100,6 +109,11 @@ def mail_detect(m: MailIn):
     return {"status": status}
 
 
-@app.post("/api/collect/file")
-def collect_file(path: str, min_score: int = 10):
-    return collectors.ingest(collectors.from_json_file(path), min_score=min_score)
+@app.post("/api/collect/saramin")
+def collect_saramin(min_score: int = 10):
+    """사람인 수집 (하루 호출 상한 적용). SARAMIN_ACCESS_KEY 필요."""
+    from . import saramin
+    try:
+        return saramin.collect(min_score=min_score)
+    except RuntimeError as e:
+        raise HTTPException(400, str(e))
